@@ -30,6 +30,8 @@ services:
   web:
     build:
       context: ../ph-mold-web
+      args:
+        NEXT_PUBLIC_FILE_SERVER_BASE_URL: ${NEXT_PUBLIC_FILE_SERVER_BASE_URL}
     expose:
       - "3000"
     environment:
