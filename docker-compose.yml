@@ -20,6 +20,7 @@ services:
       - ./contents:/app/contents
     environment:
       - NODE_ENV=${NODE_ENV}
+      - BASE_URL=${BASE_URL}
       - DOCKER_DB_HOST=${DOCKER_DB_HOST}
       - DB_HOST=${DOCKER_DB_HOST}
       - DB_PORT=${DB_PORT}
