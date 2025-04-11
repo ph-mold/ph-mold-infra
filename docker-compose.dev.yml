@@ -19,9 +19,10 @@ services:
     expose:
       - "3001"
     volumes:
-      - ./dev/contents:/app/uploads
+      - ./dev/contents:/app/contents
     environment:
       - NODE_ENV=${NODE_ENV}
+      - BASE_URL=${BASE_URL}
       - DB_HOST=${DOCKER_DB_HOST}
       - DB_PORT=${DB_PORT}
       - DB_USER=${DB_USER}
@@ -32,8 +33,14 @@ services:
     build:
       context: ../ph-mold-web
       dockerfile: Dockerfile.dev
+      args:
+        NEXT_PUBLIC_FILE_SERVER_BASE_URL: ${NEXT_PUBLIC_FILE_SERVER_BASE_URL}
     expose:
       - "3000"
+    environment:
+      - NODE_ENV=${NODE_ENV}
+      - NEXT_PUBLIC_API_BASE_URL=${NEXT_PUBLIC_API_BASE_URL}
+      - NEXT_PUBLIC_FILE_SERVER_BASE_URL=${NEXT_PUBLIC_FILE_SERVER_BASE_URL}
 
   file-server:
     image: nginx:alpine

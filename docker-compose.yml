@@ -17,9 +17,10 @@ services:
     expose:
       - "3001"
     volumes:
-      - ./contents:/app/uploads
+      - ./contents:/app/contents
     environment:
       - NODE_ENV=${NODE_ENV}
+      - BASE_URL=${BASE_URL}
       - DOCKER_DB_HOST=${DOCKER_DB_HOST}
       - DB_HOST=${DOCKER_DB_HOST}
       - DB_PORT=${DB_PORT}
@@ -28,9 +29,16 @@ services:
       - DB_NAME=${DB_NAME}
 
   web:
-    build: ../ph-mold-web
+    build:
+      context: ../ph-mold-web
+      args:
+        NEXT_PUBLIC_FILE_SERVER_BASE_URL: ${NEXT_PUBLIC_FILE_SERVER_BASE_URL}
     expose:
       - "3000"
+    environment:
+      - NODE_ENV=${NODE_ENV}
+      - NEXT_PUBLIC_API_BASE_URL=${NEXT_PUBLIC_API_BASE_URL}
+      - NEXT_PUBLIC_FILE_SERVER_BASE_URL=${NEXT_PUBLIC_FILE_SERVER_BASE_URL}
 
   file-server:
     image: nginx:alpine
