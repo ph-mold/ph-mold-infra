@@ -28,14 +28,17 @@ services:
       - DB_NAME=${DB_NAME}
 
   web:
-    build: ../ph-mold-web
+    build:
+      context: ../ph-mold-web
+      args:
+        API_PROTOCOL: ${API_PROTOCOL}
+        API_HOST_NAME: ${API_HOST_NAME}
+        API_PORT: ${API_PORT}
     expose:
       - "3000"
     environment:
+      - NODE_ENV=${NODE_ENV}
       - NEXT_PUBLIC_API_BASE_URL=${NEXT_PUBLIC_API_BASE_URL}
-      - API_PROTOCOL=${API_PROTOCOL}
-      - API_HOST_NAME=${API_HOST_NAME}
-      - API_PORT=${API_PORT}
 
   file-server:
     image: nginx:alpine
