@@ -13,7 +13,7 @@ services:
       - file-server
 
   api:
-    build: ../ph-mold-server
+    image: ghcr.io/ph-mold/ph-mold-server:${IMAGE_TAG}
     expose:
       - "3001"
     volumes:
