@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
   nginx-proxy:
     image: nginx:alpine
@@ -13,9 +11,7 @@ services:
       - file-server
 
   api:
-    build:
-      context: ../ph-mold-server
-      dockerfile: Dockerfile.dev
+    image: ghcr.io/ph-mold/ph-mold-server:${IMAGE_TAG}
     expose:
       - "3001"
     volumes:
@@ -30,11 +26,7 @@ services:
       - DB_NAME=${DB_NAME}
 
   web:
-    build:
-      context: ../ph-mold-web
-      dockerfile: Dockerfile.dev
-      args:
-        NEXT_PUBLIC_FILE_SERVER_BASE_URL: ${NEXT_PUBLIC_FILE_SERVER_BASE_URL}
+    image: ghcr.io/ph-mold/ph-mold-web:${IMAGE_TAG}
     expose:
       - "3000"
     environment:
