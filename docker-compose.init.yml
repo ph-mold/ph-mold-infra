@@ -12,7 +12,7 @@ services:
       - file-server
 
   api:
-    image: ghcr.io/ph-mold/ph-mold-server:5ddb61611eb3dcc3be2bcc587892963802839bda
+    image: ghcr.io/ph-mold/ph-mold-server:7c313b2355f0872c53db1111913e351af35ea1ba
     restart: always
     expose:
       - "3001"
@@ -32,7 +32,7 @@ services:
       - JWT_REFRESH_EXPIRES_IN=${JWT_REFRESH_EXPIRES_IN}
 
   web:
-    image: ghcr.io/ph-mold/ph-mold-web:b205566f97e27dcd53cf9e92c2f9f6b8be5a61d1
+    image: ghcr.io/ph-mold/ph-mold-web:999d2e51920d365ded5b7263d907ffc6ccf59c4e
     restart: always
     expose:
       - "3000"
