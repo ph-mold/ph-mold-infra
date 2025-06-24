@@ -46,7 +46,7 @@ services:
     image: ghcr.io/ph-mold/ph-mold-portal:${IMAGE_TAG}
     restart: always
     expose:
-      - "5123"
+      - "80"
     environment:
       - NODE_ENV=${NODE_ENV}
       - VITE_API_URL=${VITE_API_URL}
