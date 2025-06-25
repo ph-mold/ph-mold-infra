@@ -9,10 +9,11 @@ services:
     depends_on:
       - api
       - web
+      - portal
       - file-server
 
   api:
-    image: ghcr.io/ph-mold/ph-mold-server:233ba22a49e1fb6248fb8558581006c2edc4cb64
+    image: ghcr.io/ph-mold/ph-mold-server:7074c77d9b1a3bde2eadd3bba760f8b5b0391051
     restart: always
     expose:
       - "3001"
@@ -32,7 +33,7 @@ services:
       - JWT_REFRESH_EXPIRES_IN=${JWT_REFRESH_EXPIRES_IN}
 
   web:
-    image: ghcr.io/ph-mold/ph-mold-web:3a1ef883606b8cb3a57fa1c17339a21728588d3a
+    image: ghcr.io/ph-mold/ph-mold-web:667582cd40619c1599b0795baf6d8d1e930c1436
     restart: always
     expose:
       - "3000"
@@ -40,6 +41,16 @@ services:
       - NODE_ENV=${NODE_ENV}
       - NEXT_PUBLIC_API_BASE_URL=${NEXT_PUBLIC_API_BASE_URL}
       - NEXT_PUBLIC_FILE_SERVER_BASE_URL=${NEXT_PUBLIC_FILE_SERVER_BASE_URL}
+
+  portal:
+    image: ghcr.io/ph-mold/ph-mold-portal:01d7753511fc53f04cfa13a71d0126b307f766b3
+    restart: always
+    expose:
+      - "80"
+    environment:
+      - NODE_ENV=${NODE_ENV}
+      - VITE_API_URL=${VITE_API_URL}
+      - VITE_IMAGE_BASE_URL=${VITE_IMAGE_BASE_URL}
 
   file-server:
     image: nginx:alpine

@@ -9,6 +9,7 @@ services:
     depends_on:
       - api
       - web
+      - portal
       - file-server
 
   api:
@@ -40,6 +41,16 @@ services:
       - NODE_ENV=${NODE_ENV}
       - NEXT_PUBLIC_API_BASE_URL=${NEXT_PUBLIC_API_BASE_URL}
       - NEXT_PUBLIC_FILE_SERVER_BASE_URL=${NEXT_PUBLIC_FILE_SERVER_BASE_URL}
+
+  portal:
+    image: ghcr.io/ph-mold/ph-mold-portal:${IMAGE_TAG}
+    restart: always
+    expose:
+      - "80"
+    environment:
+      - NODE_ENV=${NODE_ENV}
+      - VITE_API_URL=${VITE_API_URL}
+      - VITE_IMAGE_BASE_URL=${VITE_IMAGE_BASE_URL}
 
   file-server:
     image: nginx:alpine
