@@ -43,10 +43,10 @@ services:
       - NEXT_PUBLIC_FILE_SERVER_BASE_URL=${NEXT_PUBLIC_FILE_SERVER_BASE_URL}
 
   portal:
-    image: ghcr.io/ph-mold/ph-mold-portal:818cb2edde4d6215b9e56f8fd09a7761cfd00f37
+    image: ghcr.io/ph-mold/ph-mold-portal:01d7753511fc53f04cfa13a71d0126b307f766b3
     restart: always
     expose:
-      - "5123:80"
+      - "80"
     environment:
       - NODE_ENV=${NODE_ENV}
       - VITE_API_URL=${VITE_API_URL}
